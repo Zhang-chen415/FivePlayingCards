@@ -7,7 +7,7 @@
 ##  專案簡介
 本專案為一個完整的五張撲克牌投注遊戲。玩家可以輸入押注金額，並透過「發牌 ➔ 換牌 ➔ 判斷牌型」的標準撲克牌流程來贏取獎金。除基礎要求外，本作特別強化了「聲光效果」與「遊戲沉浸感」，並實作了極度完善的防呆機制與隱藏彩蛋。
 
-> **遊戲畫面預覽：** > ![遊戲畫面](<img width="661" height="601" alt="image" src="https://github.com/user-attachments/assets/8ed5a6af-b3ed-4e37-8dad-db40c73946a2" />) 
+> **遊戲畫面預覽：** <img width="661" height="601" alt="image" src="https://github.com/user-attachments/assets/8ed5a6af-b3ed-4e37-8dad-db40c73946a2" />
 
 ---
 
