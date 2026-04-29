@@ -40,6 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtBet = new System.Windows.Forms.TextBox();
             this.btnBet = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -176,12 +177,24 @@
             this.btnBet.UseVisualStyleBackColor = true;
             this.btnBet.Click += new System.EventHandler(this.btnBet_Click);
             // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("新細明體", 15F);
+            this.label3.ForeColor = System.Drawing.Color.Yellow;
+            this.label3.Location = new System.Drawing.Point(33, 488);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(645, 43);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "歡迎打開音量 更有玩牌的氛圍 : D";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmPoker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
-            this.ClientSize = new System.Drawing.Size(701, 481);
+            this.ClientSize = new System.Drawing.Size(701, 540);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpPoker);
@@ -211,5 +224,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalMoney;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
     }
 }

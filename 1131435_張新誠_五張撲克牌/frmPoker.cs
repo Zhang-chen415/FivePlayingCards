@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace _1131435_張新誠_五張撲克牌
 {
@@ -15,6 +16,7 @@ namespace _1131435_張新誠_五張撲克牌
         PictureBox[] pic = new PictureBox[5];
         int totalMoney = 1000000; // 初始總資金 100 萬
         int currentBet = 0;       // 記錄當前局的下注金額
+        WindowsMediaPlayer bgmPlayer = new WindowsMediaPlayer();
         public frmPoker()
         {
             InitializeComponent();
@@ -44,6 +46,14 @@ namespace _1131435_張新誠_五張撲克牌
             return Properties.Resources.ResourceManager
             .GetObject(name) as Image;
         }
+        private void PlaySound(System.IO.Stream audioStream)
+        {
+            if (audioStream != null)
+            {
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(audioStream);
+                player.Play(); // Play() 會在背景播放，不會卡住程式
+            }
+        }
         private void pic_Click(object sender, MouseEventArgs e)
         {
             PictureBox pic = (PictureBox)sender;
@@ -69,6 +79,7 @@ namespace _1131435_張新誠_五張撲克牌
         }
         private void Shuffle()
         {
+            PlaySound(Properties.Resources.shuffle); // 播放輸錢音效
             Random rand = new Random();
             for (int i = 0; i < allPoker.Length; i++)
             {
@@ -85,6 +96,11 @@ namespace _1131435_張新誠_五張撲克牌
             txtBet.Text = currentBet.ToString();
             btnDealCard.Enabled = false;
             btnChangeCard.Enabled = false;
+
+            bgmPlayer.URL = "背景音樂.mp3";                 // 填寫你剛剛加入的音樂檔名
+            bgmPlayer.settings.setMode("loop", true);  // 設定為無限循環播放！
+            bgmPlayer.settings.volume = 100;            // 設定音量 (0~100，背景音樂建議調小聲)
+            bgmPlayer.controls.play();                 // 開始播放
         }
 
         private async void btnDealCard_Click_1(object sender, EventArgs e)
@@ -143,7 +159,7 @@ namespace _1131435_張新誠_五張撲克牌
 
         }
 
-        private void btnCheck_Click(object sender, EventArgs e)
+        private async void btnCheck_Click(object sender, EventArgs e)
         {
             string[] colorList = { "梅花", "方塊", "愛心", "黑桃" };
             string[] pointList = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q",
@@ -224,10 +240,21 @@ namespace _1131435_張新誠_五張撲克牌
             if (winAmount > 0)
             {
                 lblResult.Text = $"{result}！贏得 {winAmount} 元！";
+                bgmPlayer.controls.pause();
+                PlaySound(Properties.Resources.win2); // 播放中獎音效
+                await Task.Delay(2000);
+                PlaySound(Properties.Resources.win1); // 播放中獎音效
+                bgmPlayer.controls.play();
             }
             else
             {
                 lblResult.Text = $"{result}！輸了 {currentBet} 元！";
+                bgmPlayer.controls.pause();
+                PlaySound(Properties.Resources.lose1); // 播放輸錢音效
+                await Task.Delay(1000);
+                PlaySound(Properties.Resources.lose2); // 播放輸錢音效
+                await Task.Delay(1000);
+                bgmPlayer.controls.play();
             }
 
             // 更新畫面上的總資金數字
