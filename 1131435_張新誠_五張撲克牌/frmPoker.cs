@@ -14,8 +14,9 @@ namespace _1131435_張新誠_五張撲克牌
     public partial class frmPoker: Form
     {
         PictureBox[] pic = new PictureBox[5];
-        int totalMoney = 1000000; // 初始總資金 100 萬
+        int totalMoney = 100000; // 初始總資金 10 萬
         int currentBet = 0;       // 記錄當前局的下注金額
+        int loanMoney = 0;     //貸款金額
         WindowsMediaPlayer bgmPlayer = new WindowsMediaPlayer();
         public frmPoker()
         {
@@ -105,6 +106,7 @@ namespace _1131435_張新誠_五張撲克牌
 
         private async void btnDealCard_Click_1(object sender, EventArgs e)
         {
+            btnDealCard.Enabled = false; //把發牌功能鎖起來
             // 先將牌面蓋掉
             for (int i = 0; i < 5; i++)
             {
@@ -133,7 +135,6 @@ namespace _1131435_張新誠_五張撲克牌
                 pic[i].Tag = "front";
             }
             btnChangeCard.Enabled = true;
-            btnDealCard.Enabled = false;
         }
 
         private void btnChangeCard_Click(object sender, EventArgs e)
@@ -256,6 +257,36 @@ namespace _1131435_張新誠_五張撲克牌
                 await Task.Delay(1000);
                 bgmPlayer.controls.play();
             }
+            if (totalMoney <= 0)
+            {
+                bgmPlayer.controls.stop();
+                bgmPlayer.URL = "broken.mp3";
+                bgmPlayer.settings.setMode("loop", true);  // 設定為無限循環播放
+                bgmPlayer.settings.volume = 100;            // 設定音量 (0~100，背景音樂建議調小聲)
+                bgmPlayer.controls.play();                 // 開始播放
+                frmPoker.ActiveForm.Size = new Size(550, 550);
+                btnBet.Enabled = false;       // 鎖死一般押注按鈕
+                txtBet.Enabled = false;
+                btnBailout.Visible = true;    // 讓紓困按鈕顯現出來！
+                lblLoan.Visible = true;
+                lblLoanMoney.Visible = true;
+
+                MessageBox.Show("還敢賭阿，破產了吧，臭乞丐");
+            }
+            else
+            {
+                // 如果還有錢，就正常開放下注
+                btnBet.Enabled = true;
+                txtBet.Enabled = true;
+            }
+            if (totalMoney > 3000 && loanMoney > 0 && btnBailout.Visible == false)
+            {
+                btnPayBack.Visible = true;
+            }
+            else
+            {
+                btnPayBack.Visible = false;
+            }
 
             // 更新畫面上的總資金數字
             lblTotalMoney.Text = totalMoney.ToString();
@@ -363,6 +394,54 @@ namespace _1131435_張新誠_五張撲克牌
             btnBet.Enabled = false;       // 鎖定下注按鈕
             txtBet.Enabled = false;       // 鎖定輸入框
             btnDealCard.Enabled = true;   // 開放「發牌」按鈕讓遊戲開始
+        }
+
+        private async void btnBailout_Click(object sender, EventArgs e)
+        {
+            totalMoney += 3000;
+            lblTotalMoney.Text = totalMoney.ToString();
+            loanMoney += 3000;
+            lblLoanMoney.Text = loanMoney.ToString();
+
+            // 2. 播放復活的音效
+            PlaySound(Properties.Resources.ahhhh); 
+
+            // 3. 恢復介面狀態
+            btnBailout.Visible = false; // 把紓困按鈕藏起來
+            btnBet.Enabled = true;      // 開放一般下注
+            txtBet.Enabled = true;
+
+            await Task.Delay(1500);
+            MessageBox.Show("貸款了 3,000 元，要拚才會贏");
+            bgmPlayer.URL = "背景音樂.mp3";
+            bgmPlayer.settings.setMode("loop", true);  // 設定為無限循環播放
+            bgmPlayer.settings.volume = 100;            // 設定音量 (0~100，背景音樂建議調小聲)
+            bgmPlayer.controls.play();                 // 開始播放
+        }
+
+        private void btnPayBack_Click(object sender, EventArgs e)
+        {
+            if(totalMoney >= 3000)
+            {
+                totalMoney -= 3000;
+                lblTotalMoney.Text = totalMoney.ToString();
+                loanMoney -= 3000;
+                lblLoanMoney.Text = loanMoney.ToString();
+                if(loanMoney == 0)
+                {
+                    lblLoanMoney.Text = "還完了，上天眷顧，繼續拚搏";
+                    btnPayBack.Visible = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("沒錢還啥，拿命還嗎");
+            }
+        }
+
+        private void txtBet_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

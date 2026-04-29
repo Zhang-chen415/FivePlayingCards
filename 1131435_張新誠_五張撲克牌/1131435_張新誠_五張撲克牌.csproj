@@ -305,6 +305,10 @@
     <None Include="Resources\背景音樂.mp3" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="broken.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\ahhhh.wav" />
     <Content Include="背景音樂.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

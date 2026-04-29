@@ -41,6 +41,10 @@
             this.txtBet = new System.Windows.Forms.TextBox();
             this.btnBet = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnBailout = new System.Windows.Forms.Button();
+            this.lblLoan = new System.Windows.Forms.Label();
+            this.lblLoanMoney = new System.Windows.Forms.Label();
+            this.btnPayBack = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -165,6 +169,7 @@
             this.txtBet.Size = new System.Drawing.Size(174, 25);
             this.txtBet.TabIndex = 3;
             this.txtBet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBet.TextChanged += new System.EventHandler(this.txtBet_TextChanged);
             // 
             // btnBet
             // 
@@ -179,21 +184,73 @@
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("新細明體", 15F);
+            this.label3.Font = new System.Drawing.Font("新細明體", 14F);
             this.label3.ForeColor = System.Drawing.Color.Yellow;
-            this.label3.Location = new System.Drawing.Point(33, 488);
+            this.label3.Location = new System.Drawing.Point(29, 506);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(645, 43);
+            this.label3.Size = new System.Drawing.Size(401, 52);
             this.label3.TabIndex = 3;
             this.label3.Text = "歡迎打開音量 更有玩牌的氛圍 : D";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnBailout
+            // 
+            this.btnBailout.Font = new System.Drawing.Font("標楷體", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnBailout.ForeColor = System.Drawing.Color.Black;
+            this.btnBailout.Location = new System.Drawing.Point(463, 496);
+            this.btnBailout.Name = "btnBailout";
+            this.btnBailout.Size = new System.Drawing.Size(215, 74);
+            this.btnBailout.TabIndex = 4;
+            this.btnBailout.Text = "貸款繼續拚\r\n我命由我不由天\r\n這次沒中再三千";
+            this.btnBailout.UseVisualStyleBackColor = true;
+            this.btnBailout.Visible = false;
+            this.btnBailout.Click += new System.EventHandler(this.btnBailout_Click);
+            // 
+            // lblLoan
+            // 
+            this.lblLoan.AutoSize = true;
+            this.lblLoan.Font = new System.Drawing.Font("新細明體", 15F);
+            this.lblLoan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblLoan.Location = new System.Drawing.Point(57, 578);
+            this.lblLoan.Name = "lblLoan";
+            this.lblLoan.Size = new System.Drawing.Size(175, 25);
+            this.lblLoan.TabIndex = 5;
+            this.lblLoan.Text = "累積貸款金額 :";
+            this.lblLoan.Visible = false;
+            // 
+            // lblLoanMoney
+            // 
+            this.lblLoanMoney.Font = new System.Drawing.Font("新細明體", 14F);
+            this.lblLoanMoney.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblLoanMoney.Location = new System.Drawing.Point(238, 580);
+            this.lblLoanMoney.Name = "lblLoanMoney";
+            this.lblLoanMoney.Size = new System.Drawing.Size(440, 23);
+            this.lblLoanMoney.TabIndex = 6;
+            this.lblLoanMoney.Text = "0";
+            this.lblLoanMoney.Visible = false;
+            // 
+            // btnPayBack
+            // 
+            this.btnPayBack.Font = new System.Drawing.Font("新細明體", 14F);
+            this.btnPayBack.Location = new System.Drawing.Point(463, 515);
+            this.btnPayBack.Name = "btnPayBack";
+            this.btnPayBack.Size = new System.Drawing.Size(215, 69);
+            this.btnPayBack.TabIndex = 7;
+            this.btnPayBack.Text = "還3000";
+            this.btnPayBack.UseVisualStyleBackColor = true;
+            this.btnPayBack.Visible = false;
+            this.btnPayBack.Click += new System.EventHandler(this.btnPayBack_Click);
             // 
             // frmPoker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
-            this.ClientSize = new System.Drawing.Size(701, 540);
+            this.ClientSize = new System.Drawing.Size(701, 561);
+            this.Controls.Add(this.btnPayBack);
+            this.Controls.Add(this.lblLoanMoney);
+            this.Controls.Add(this.lblLoan);
+            this.Controls.Add(this.btnBailout);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -207,6 +264,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -225,5 +283,9 @@
         private System.Windows.Forms.Label lblTotalMoney;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnBailout;
+        private System.Windows.Forms.Label lblLoan;
+        private System.Windows.Forms.Label lblLoanMoney;
+        private System.Windows.Forms.Button btnPayBack;
     }
 }
