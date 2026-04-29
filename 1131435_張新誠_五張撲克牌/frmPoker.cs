@@ -251,7 +251,7 @@ namespace _1131435_張新誠_五張撲克牌
 
         private void frmPoker_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (btnDealCard.Enabled == false)
+            if (btnDealCard.Enabled == false && btnBet.Enabled == false)
             {
                 switch (e.KeyChar)
                 {
@@ -303,6 +303,9 @@ namespace _1131435_張新誠_五張撲克牌
                         playerPoker[3] = 14;
                         playerPoker[4] = 13;
                         break;
+
+                    default:
+                        return;
                 }
                 // 顯示五張撲克牌到桌面上
                 ShowCards();
