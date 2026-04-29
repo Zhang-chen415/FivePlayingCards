@@ -74,10 +74,6 @@ namespace _1131435_張新誠_五張撲克牌
         }
         int[] allPoker = new int[52];
         int[] playerPoker = new int[5];
-        private async void btnDealCard_Click(object sender, EventArgs e)
-        {
-           
-        }
         private void Shuffle()
         {
             PlaySound(Properties.Resources.shuffle); // 播放輸錢音效
@@ -135,6 +131,7 @@ namespace _1131435_張新誠_五張撲克牌
                 pic[i].Tag = "front";
             }
             btnChangeCard.Enabled = true;
+            btnChangeCard.Focus();
         }
 
         private void btnChangeCard_Click(object sender, EventArgs e)
@@ -162,6 +159,7 @@ namespace _1131435_張新誠_五張撲克牌
 
         private async void btnCheck_Click(object sender, EventArgs e)
         {
+            btnBet.Enabled = true;
             string[] colorList = { "梅花", "方塊", "愛心", "黑桃" };
             string[] pointList = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q",
 "K" };
@@ -264,7 +262,7 @@ namespace _1131435_張新誠_五張撲克牌
                 bgmPlayer.settings.setMode("loop", true);  // 設定為無限循環播放
                 bgmPlayer.settings.volume = 100;            // 設定音量 (0~100，背景音樂建議調小聲)
                 bgmPlayer.controls.play();                 // 開始播放
-                frmPoker.ActiveForm.Size = new Size(550, 550);
+                this.Size = new Size(550, 550);
                 btnBet.Enabled = false;       // 鎖死一般押注按鈕
                 txtBet.Enabled = false;
                 btnBailout.Visible = true;    // 讓紓困按鈕顯現出來！
